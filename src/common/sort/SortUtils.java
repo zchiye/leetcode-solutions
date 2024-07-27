@@ -41,9 +41,24 @@ public class SortUtils {
 
 
     public static void main(String[] args) {
-        List<Integer> testList = new ArrayList<>(RandomUtils.randomIntList(1, 101, 20));
+        List<Integer> testList = new ArrayList<>(RandomUtils.randomIntList(1, 101, 1_000));
+        System.out.println(testList);
+        System.out.println(validateSorted(testList));
         quickSort(testList);
         System.out.println(testList);
+        System.out.println(validateSorted(testList));
+    }
+
+    public static <T extends Comparable<T>> boolean validateSorted(List<T> list) {
+        if (list == null || list.size() <= 1) {
+            return true;
+        }
+        for (int i = 0; i < list.size() - 2; i++) {
+            if (list.get(i).compareTo(list.get(i + 1)) > 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }
